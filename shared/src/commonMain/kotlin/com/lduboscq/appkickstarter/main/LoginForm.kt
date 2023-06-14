@@ -106,5 +106,5 @@ login validation function
 for now, it is hardcoded for demo, username == "jun" && password == "1234"
  ******************************************************************************/
 fun login(username : String, password: String) : Boolean{
-    return username == "jun" && password == "1234"
+    return username == "Jun" && password == "1234"
 }

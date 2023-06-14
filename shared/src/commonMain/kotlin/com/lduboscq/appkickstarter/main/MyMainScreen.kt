@@ -12,6 +12,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
@@ -25,70 +26,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 
-internal class MainScreen : Screen {
+internal class MyMainScreen : Screen {
 
     @Composable
     override fun Content() {
 
-        var hello by remember { mutableStateOf("Assignment") }
         var isLogin by remember { mutableStateOf(false) }
         var username = "";
         Scaffold(
             topBar = {
-                TopAppBar(
-                    modifier = Modifier.fillMaxWidth(),
-                    backgroundColor = Color.Blue,
-                    contentColor = Color.White
-                ) {
-                    /********************************************
-                    binding the text with var hello
-                     *******************************************/
-                    Text(
-                        text = "$hello",
-                        modifier = Modifier.fillMaxWidth().weight(1f),
-                        textAlign = TextAlign.Center
-                    )
-
-                    /********************************************
-                    when click this button, it will change the title back and forth
-                     *******************************************/
-
-                    IconButton(
-                        onClick = {
-                            if (hello == "Assignment")
-                                hello = "Hello world!"
-                            else hello = "Assignment"
-                        },
-                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
-                    ) {
-                        Icon(imageVector = Icons.Default.Info, contentDescription = "information")
-                    }
-                }
+                MyTopBar("Main Form")
             },
             bottomBar = {
-                BottomAppBar {
-                    Text(
-                        "Copyright (c) 2023 Jun Liang",
-                        modifier = Modifier.fillMaxWidth().weight(1f),
-                        textAlign = TextAlign.Center
-                    )
-                    if (isLogin) {
-                        IconButton(
-                            onClick = {
-                                isLogin = false
-                            },
-                            modifier = Modifier.align(alignment = Alignment.CenterVertically)
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.ExitToApp,
-                                contentDescription = "logout"
-                            )
-                        }
-                    }
-                }
+                MyBottomBar()
             }
         )
         {
@@ -119,4 +71,5 @@ internal class MainScreen : Screen {
             }
         }
     }
+
 }
