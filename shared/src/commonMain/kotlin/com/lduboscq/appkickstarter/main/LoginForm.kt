@@ -107,4 +107,7 @@ for now, it is hardcoded for demo, username == "jun" && password == "1234"
  ******************************************************************************/
 fun login(username : String, password: String) : Boolean{
     return username == "Jun" && password == "1234"
+    // mongdb password = BUEc8EEcBZkfu33x
+    //username = junliang
+    //mongdb access key = 421f72b5-a0bd-46e2-a54a-a24dd4a2b7da
 }

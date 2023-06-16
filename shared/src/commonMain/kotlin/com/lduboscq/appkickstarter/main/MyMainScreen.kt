@@ -37,7 +37,7 @@ internal class MyMainScreen : Screen {
         var username = "";
         Scaffold(
             topBar = {
-                MyTopBar("Main Form")
+                MyTopBar("Main Form", navigateBack = {}, false)
             },
             bottomBar = {
                 MyBottomBar()

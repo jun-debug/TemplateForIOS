@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.compose")
     kotlin("plugin.serialization")
     id("dev.icerock.mobile.multiplatform-resources")
+    id("io.realm.kotlin") version "1.9.1"
 }
 
 version = "1.0-SNAPSHOT"
@@ -40,6 +41,8 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                
+                implementation("io.realm.kotlin:library-sync:1.9.1")
 
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
