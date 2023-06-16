@@ -4,6 +4,8 @@ import com.lduboscq.appkickstarter.model.Person
 import com.lduboscq.appkickstarter.model.PersonRepository
 import io.realm.kotlin.Realm
 import io.realm.kotlin.query.RealmResults
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 
 abstract class PersonRepositoryRealm : PersonRepository{
 
@@ -27,7 +29,7 @@ abstract class PersonRepositoryRealm : PersonRepository{
         return person
     }
 
-    private suspend fun convertToModelData(data:RealmResults<PersonRealmObject>) : ArrayList<Person>{
+    private suspend fun convertToModelData(data:RealmResults<PersonRealmObject>) : Flow<Person>{
         var results : ArrayList<Person> = ArrayList()
         for (personObject in data){
             val person : Person = Person(
@@ -38,7 +40,7 @@ abstract class PersonRepositoryRealm : PersonRepository{
             )
             results.add(person)
         }
-        return results
+        return results.asFlow()
     }
 
     abstract suspend fun setupRealmSync()
@@ -56,7 +58,7 @@ abstract class PersonRepositoryRealm : PersonRepository{
         return  convertToModelData(personRealmObject)
     }
 
-    override suspend fun getAllPerson(): ArrayList<Person> {
+    override suspend fun getAllPerson(): Flow<Person> {
         if (!this::realm.isInitialized){
             setupRealmSync()
         }
