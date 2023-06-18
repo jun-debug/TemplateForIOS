@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.BottomAppBar
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -48,7 +49,7 @@ internal class MyMainScreen() : Screen {
                 ) {
                     IconButton(
                         onClick = {
-                            navigator.push(ContactScreen())
+                            navigator.push(PersonListScreen())
                         },
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                     ) {
@@ -84,10 +85,13 @@ internal class MyMainScreen() : Screen {
                 }
             },
             bottomBar = {
-                MyBottomBar{
-                    IconButton(
-                        onClick = { isLogin = false}
+                BottomAppBar(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        "Copyright (c) 2023 Jun Liang",
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center
                     )
+                    IconButton(onClick = { isLogin = false })
                     {
                         Icon(imageVector = Icons.Default.Lock, contentDescription = "Logout")
                     }

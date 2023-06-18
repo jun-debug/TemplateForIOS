@@ -9,7 +9,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.lduboscq.appkickstarter.di.getScreenModel
 import org.koin.core.parameter.parametersOf
 
-internal data class PersonDetailScreen(val personId: String) : Screen {
+internal data class PersonDetailScreen(val personId: String?) : Screen {
 
     @Composable
     override fun Content() {

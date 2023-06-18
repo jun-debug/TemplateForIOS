@@ -27,6 +27,7 @@ class FrogScreen : Screen {
         val state by screenModel.state.collectAsState()
         val frogDatasState by screenModel.frogDatasState.collectAsState()
 
+
         var frogName by remember { mutableStateOf("") }
 
         Column {

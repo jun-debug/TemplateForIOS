@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.lduboscq.appkickstarter.model.Person
@@ -28,19 +29,16 @@ fun PersonCard(person: Person,
                onEditClick: (Person) -> Unit = {},
                onDeleteClick: (Person) -> Unit = {}) {
     Card(
-        modifier = Modifier
-            .padding(8.dp)
+        modifier = Modifier.padding(6.dp)
             .fillMaxWidth(),
-        elevation = 6.dp
+        elevation = 4.dp
     ) {
-        Row(modifier = Modifier.padding(8.dp)) {
+        Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
             Image(
                 url = person.imageUrl,
                 contentDescription = person.name,
-                modifier = Modifier
-                    .size(80.dp)
-                    .clip(CircleShape)
-                    .align(Alignment.CenterVertically)
+                modifier = Modifier.size(50.dp).clip(CircleShape),
+                contentScale = ContentScale.FillBounds
             )
             Column(
                 modifier = Modifier

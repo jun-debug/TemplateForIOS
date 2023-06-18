@@ -66,17 +66,20 @@ abstract class PersonRepositoryRealm : PersonRepository{
         return convertToModelData(personObjects)
     }
 
-    override suspend fun addPerson(person: Person) {
+    override suspend fun addPerson(person: Person) : Person? {
         if (!this::realm.isInitialized){
             setupRealmSync()
         }
+        var personRealmObject : PersonRealmObject? = null
         realm.write{
-            copyToRealm(PersonRealmObject().apply {
+             personRealmObject = copyToRealm(PersonRealmObject().apply {
                 name = person.name
                 role = person.role
                 imageUrl = person.imageUrl
             })
         }
+        return convertToModelData(personRealmObject)
+
     }
 
     override suspend fun deletePerson(id : String) {
@@ -86,7 +89,7 @@ abstract class PersonRepositoryRealm : PersonRepository{
         var personRealmObject: PersonRealmObject? = realm.query<PersonRealmObject>(PersonRealmObject::class, "_id = \"$id\"").find().first()
         if (personRealmObject != null){
             realm.write {
-                delete(personRealmObject)
+                findLatest(personRealmObject)?.also { delete(it) }
             }
         }
     }

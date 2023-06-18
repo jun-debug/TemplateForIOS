@@ -17,6 +17,7 @@ class PersonScreenModel(private val repository: PersonRepository)
         class Error(val errorMsg: String?) : State()
     }
 
+
     fun getPerson(name: String){
         coroutineScope.launch {
             try {
@@ -27,6 +28,10 @@ class PersonScreenModel(private val repository: PersonRepository)
                 mutableState.value = State.Error(e.message)
             }
         }
+    }
+
+    init {
+        getPersons()
     }
 
     fun getPersons(){
@@ -45,8 +50,7 @@ class PersonScreenModel(private val repository: PersonRepository)
         coroutineScope.launch {
             try {
                 mutableState.value = State.Loading
-                repository.addPerson(person)
-                mutableState.value = State.Complete
+                mutableState.value = State.Result.SingleResult(repository.addPerson(person))
             }
             catch (e : Exception){
                 mutableState.value = State.Error(e.message)

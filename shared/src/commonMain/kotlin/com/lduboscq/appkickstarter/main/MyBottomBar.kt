@@ -9,13 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-fun MyBottomBar(content: @Composable () -> Unit = {}) {
+fun MyBottomBar() {
     BottomAppBar {
         Text(
             "Copyright (c) 2023 Jun Liang",
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center
         )
-        content
     }
 }
