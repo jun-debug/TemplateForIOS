@@ -14,7 +14,7 @@ fun MyBottomBar(content: @Composable () -> Unit = {}) {
         Text(
             "Copyright (c) 2023 Jun Liang",
             modifier = Modifier.weight(1f),
-            textAlign = TextAlign.End
+            textAlign = TextAlign.Center
         )
         content
     }

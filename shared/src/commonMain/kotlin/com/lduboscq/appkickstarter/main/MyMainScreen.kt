@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -13,6 +14,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
@@ -22,14 +24,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 
 
-internal class MyMainScreen : Screen {
+internal class MyMainScreen() : Screen {
 
     @Composable
     override fun Content() {
@@ -42,10 +46,19 @@ internal class MyMainScreen : Screen {
                 TopAppBar(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
-
+                    IconButton(
+                        onClick = {
+                            navigator.push(ContactScreen())
+                        },
+                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
+                    ) {
+                        Icon(imageVector = Icons.Default.List, modifier = Modifier.size(30.dp), contentDescription = "Person list")
+                    }
                     Text(
                         text = "Welcome",
                         modifier = Modifier.fillMaxWidth().weight(1f),
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp,
                         textAlign = TextAlign.Center
                     )
                     /********************************************
@@ -53,7 +66,7 @@ internal class MyMainScreen : Screen {
                      *******************************************/
                     IconButton(
                         onClick = {
-                            navigator.push(InfoScreen())
+                            navigator.push(ContactScreen())
                         },
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                     ) {
@@ -62,7 +75,7 @@ internal class MyMainScreen : Screen {
 
                     IconButton(
                         onClick = {
-                                  navigator.push(ContactScreen())
+                                  navigator.push(InfoScreen())
                         },
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                     ) {
