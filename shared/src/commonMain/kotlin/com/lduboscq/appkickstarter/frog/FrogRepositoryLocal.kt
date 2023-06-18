@@ -18,7 +18,7 @@ class FrogRepositoryLocal() {
     lateinit var realm: Realm
     private fun setupRealmSync() {
         val config = RealmConfiguration.Builder(setOf(Frog::class))
-            .inMemory()
+//            .inMemory()
             .build()
         realm = Realm.open(config)
     }

@@ -9,7 +9,7 @@ import com.lduboscq.appkickstarter.main.MyMainScreen
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 public fun MainApp() {
-    Navigator(FrogScreen()) { navigator ->
+    Navigator(MyMainScreen()) { navigator ->
         SlideTransition(navigator)
     }
 }

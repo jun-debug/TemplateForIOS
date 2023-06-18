@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
-public fun MyTopBar(title: String, navigateBack: ()-> Unit, backEnabled : Boolean = true) {
+public fun MyTopBar(title: String, backEnabled : Boolean = true, navigateBack: ()-> Unit = {}) {
     TopAppBar(
         modifier = Modifier.fillMaxWidth(),
         backgroundColor = Color.Blue,
@@ -27,7 +27,7 @@ public fun MyTopBar(title: String, navigateBack: ()-> Unit, backEnabled : Boolea
                 onClick = navigateBack,
                 modifier = Modifier.align(alignment = Alignment.CenterVertically)
             ) {
-                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "information")
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "go back")
             }
         }
         /********************************************
@@ -39,18 +39,5 @@ public fun MyTopBar(title: String, navigateBack: ()-> Unit, backEnabled : Boolea
             modifier = Modifier.fillMaxWidth().weight(1f),
             textAlign = TextAlign.Center
         )
-
-        /********************************************
-        when click this button, it will change the title back and forth
-         *******************************************/
-        if (backEnabled) {
-            IconButton(
-                onClick = {
-                },
-                modifier = Modifier.align(alignment = Alignment.CenterVertically)
-            ) {
-                Icon(imageVector = Icons.Default.Home, contentDescription = "information")
-            }
-        }
     }
 }

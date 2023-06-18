@@ -2,7 +2,6 @@ package com.lduboscq.appkickstarter.model
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class PersonScreenModel(private val repository: PersonRepository)
@@ -12,7 +11,7 @@ class PersonScreenModel(private val repository: PersonRepository)
         object Loading : State()
         sealed class Result: State(){
             class SingleResult(val person: Person?) : Result()
-            class MultiResults(val personList: Flow<Person>?) : Result()
+            class MultiResults(val personList: List<Person>) : Result()
         }
         object Complete: State()
         class Error(val errorMsg: String?) : State()
@@ -23,6 +22,18 @@ class PersonScreenModel(private val repository: PersonRepository)
             try {
                 mutableState.value = State.Loading
                 mutableState.value = State.Result.SingleResult(repository.getPerson(name))
+            }
+            catch (e : Exception){
+                mutableState.value = State.Error(e.message)
+            }
+        }
+    }
+
+    fun getPersons(){
+        coroutineScope.launch {
+            try {
+                mutableState.value = State.Loading
+                mutableState.value = State.Result.MultiResults(repository.getPersons())
             }
             catch (e : Exception){
                 mutableState.value = State.Error(e.message)

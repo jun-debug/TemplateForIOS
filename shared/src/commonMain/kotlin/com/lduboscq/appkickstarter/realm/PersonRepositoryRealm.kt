@@ -29,8 +29,8 @@ abstract class PersonRepositoryRealm : PersonRepository{
         return person
     }
 
-    private suspend fun convertToModelData(data:RealmResults<PersonRealmObject>) : Flow<Person>{
-        var results : ArrayList<Person> = ArrayList()
+    private suspend fun convertToModelData(data:RealmResults<PersonRealmObject>) : MutableList<Person>{
+        var results = mutableListOf<Person>()
         for (personObject in data){
             val person : Person = Person(
                 id = personObject._id,
@@ -40,7 +40,7 @@ abstract class PersonRepositoryRealm : PersonRepository{
             )
             results.add(person)
         }
-        return results.asFlow()
+        return results
     }
 
     abstract suspend fun setupRealmSync()
@@ -58,7 +58,7 @@ abstract class PersonRepositoryRealm : PersonRepository{
         return  convertToModelData(personRealmObject)
     }
 
-    override suspend fun getAllPerson(): Flow<Person> {
+    override suspend fun getPersons(): MutableList<Person> {
         if (!this::realm.isInitialized){
             setupRealmSync()
         }
