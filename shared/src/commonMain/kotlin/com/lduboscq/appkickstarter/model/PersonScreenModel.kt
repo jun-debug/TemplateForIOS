@@ -62,8 +62,7 @@ class PersonScreenModel(private val repository: PersonRepository)
         coroutineScope.launch {
             try {
                 mutableState.value = State.Loading
-                repository.updatePerson(person)
-                mutableState.value = State.Complete
+                mutableState.value = State.Result.SingleResult(repository.updatePerson(person))
             }
             catch (e : Exception){
                 mutableState.value = State.Error(e.message)

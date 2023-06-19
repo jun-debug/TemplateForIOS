@@ -87,10 +87,6 @@ internal class PersonListScreen : Screen{
                             }
                             else {
                                 personScreenModel.updatePerson(it)
-                                val idx : Int = personList.indexOfFirst { person: Person -> person.id == it.id }
-                                if (idx > -1){
-                                    personList[idx] = it
-                                }
                             }
                         },
                         onDone = { isAddingMode = false })
@@ -104,8 +100,12 @@ internal class PersonListScreen : Screen{
                             if (state is PersonScreenModel.State.Result.SingleResult) {
                                 if ((state as PersonScreenModel.State.Result.SingleResult).person != null) {
                                     currentPerson = (state as PersonScreenModel.State.Result.SingleResult).person!!
-                                    if (personList.indexOfFirst { person: Person -> person.id == currentPerson.id } == -1){
+                                    val idx = personList.indexOfFirst { person: Person -> person.id == currentPerson.id }
+                                    if (idx == -1){
                                         personList.add(currentPerson)
+                                    }
+                                    else{
+                                         personList[idx] = currentPerson
                                     }
                                 }
                             } else if (state is PersonScreenModel.State.Result.MultiResults) {
@@ -135,6 +135,9 @@ internal class PersonListScreen : Screen{
                     }
                     PersonList(
                         personList = personList,
+                        handlePersonDetailClick = {
+                                                  navigator.push(PersonDetailScreen(it))
+                        },
                         handleDeleteClick = {
                             isLoadingComplete = false
                             it.id?.let { id -> personScreenModel.deletePerson(id) }

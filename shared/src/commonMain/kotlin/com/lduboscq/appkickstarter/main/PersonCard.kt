@@ -1,5 +1,6 @@
 package com.lduboscq.appkickstarter.main
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,7 +31,7 @@ fun PersonCard(person: Person,
                onDeleteClick: (Person) -> Unit = {}) {
     Card(
         modifier = Modifier.padding(6.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth().clickable { onClick(person) },
         elevation = 4.dp
     ) {
         Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {

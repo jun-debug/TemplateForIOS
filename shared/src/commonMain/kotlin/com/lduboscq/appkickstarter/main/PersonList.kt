@@ -11,11 +11,11 @@ import androidx.compose.ui.Modifier
 import com.lduboscq.appkickstarter.model.Person
 
 @Composable
-fun PersonList(personList: List<Person>, handleDeleteClick: (Person) -> Unit, handleEditClick : (Person) -> Unit){
+fun PersonList(personList: List<Person>, handlePersonDetailClick: (Person) -> Unit, handleDeleteClick: (Person) -> Unit, handleEditClick : (Person) -> Unit){
 
     LazyColumn (modifier = Modifier.fillMaxSize()) {
         items(personList){
-            PersonCard(person = it, onEditClick = handleEditClick, onDeleteClick = handleDeleteClick)
+            PersonCard(person = it, onClick = handlePersonDetailClick,  onEditClick = handleEditClick, onDeleteClick = handleDeleteClick)
         }
     }
 }

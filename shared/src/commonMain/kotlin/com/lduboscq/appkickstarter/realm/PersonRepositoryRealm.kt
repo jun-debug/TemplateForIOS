@@ -94,19 +94,22 @@ abstract class PersonRepositoryRealm : PersonRepository{
         }
     }
 
-    override suspend fun updatePerson(person: Person) {
-        if (!this::realm.isInitialized){
+    override suspend fun updatePerson(person: Person) : Person {
+        if (!this::realm.isInitialized) {
             setupRealmSync()
         }
-        var personRealmObject: PersonRealmObject? = realm.query<PersonRealmObject>(PersonRealmObject::class, "_id = \"${person.id}\"").find().first()
+        var personRealmObject: PersonRealmObject? = realm.query<PersonRealmObject>(
+            PersonRealmObject::class,
+            "_id = \"${person.id}\""
+        ).find().first()
         if (personRealmObject != null) {
             realm.write {
-                personRealmObject.apply {
-                    name = person.name
-                    role = person.role
-                    imageUrl = person.imageUrl
-                }
+                var newPerson = findLatest(personRealmObject!!)
+                newPerson?.name = person.name
+                newPerson?.role = person.role
+                newPerson?.imageUrl = person.imageUrl
             }
         }
+        return person
     }
 }

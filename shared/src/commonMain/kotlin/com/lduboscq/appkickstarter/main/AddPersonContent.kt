@@ -33,7 +33,7 @@ import com.lduboscq.appkickstarter.model.Person
 fun AddPersonContent(person: Person, onSavePerson: (Person) -> Unit, onDone:()-> Unit) {
     var name by remember { mutableStateOf(person.name) }
     var role by remember { mutableStateOf(person.role) }
-    var imageUrl by remember { mutableStateOf("https://www.akronzoo.org/sites/default/files/styles/square_large/public/assets/animals/Tiger-main.png?h=00546c34&itok=0LXXy7LI") }
+    var imageUrl by remember { mutableStateOf("https://i.pravatar.cc/150?img=1") }
 
     Column(
         modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
